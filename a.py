@@ -1,7 +1,3 @@
-import pandas as pd
-from sklearn.datasets import load_digits
+from tensorflow.keras.datasets import fashion_mnist
 
-d = load_digits()
-df = pd.DataFrame(d.data)
-df["target"] = d.target
-df.to_csv("datasets/digits.csv", index=False)
+(X_train, y_train), (X_test, y_test) = fashion_mnist.load_data()
