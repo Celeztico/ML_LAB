@@ -14,8 +14,8 @@ Tasks:
 
 import pandas as pd
 import matplotlib.pyplot as plt
-import tensorflow as tf
 import time
+from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score
 
 # Load local dataset
@@ -27,33 +27,30 @@ y_train = train["label"].values
 X_test = test.drop("label", axis=1).values / 255.0
 y_test = test["label"].values
 
+# Compare activation functions
+activations = ["logistic", "relu", "tanh"] # sigmoid = logistic in scikitlearn as compared to tensor flow
 results = {}
 
-# Compare activation functions
-for act in ["sigmoid", "relu", "tanh"]:
-    model = tf.keras.Sequential([
-        tf.keras.layers.Input(shape=(784,)),
-        tf.keras.layers.Dense(128, activation=act),
-        tf.keras.layers.Dense(10, activation="softmax")
-    ])
-
-    model.compile(optimizer="adam",
-                  loss="sparse_categorical_crossentropy",
-                  metrics=["accuracy"])
+for act in activations:
+    model = MLPClassifier(hidden_layer_sizes=(128,),
+                          activation=act,
+                          max_iter=30,
+                          random_state=42)
 
     start = time.time()
-    model.fit(X_train, y_train, epochs=5, verbose=0)
+    model.fit(X_train, y_train)
     elapsed = time.time() - start
 
-    pred = model.predict(X_test, verbose=0).argmax(axis=1)
+    pred = model.predict(X_test)
     acc = accuracy_score(y_test, pred)
     results[act] = acc
 
-    print(act, "Accuracy:", acc, "Time:", round(elapsed, 2), "seconds")
+    print(act, "Accuracy:", acc,
+          "Time:", round(elapsed, 2), "seconds")
 
 # Plot comparison
 plt.bar(results.keys(), results.values())
 plt.xlabel("Activation Function")
-plt.ylabel("Test Accuracy")
-plt.title("MNIST Activation Function Comparison")
+plt.ylabel("Accuracy")
+plt.title("MNIST Activation Comparison")
 plt.show()
