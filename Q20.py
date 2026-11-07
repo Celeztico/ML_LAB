@@ -11,6 +11,7 @@ Tasks:
 
 '''
 
+
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -20,10 +21,10 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 
 # Load dataset
-df = pd.read_csv("datasets/boston_housing.csv")
+df = pd.read_csv("datasets/BostonHousing.csv")
 
-X = df.drop("MEDV", axis=1)
-y = df["MEDV"]
+X = df[["rm"]]
+y = df["medv"]
 
 # Split dataset
 X_train, X_test, y_train, y_test = train_test_split(
@@ -61,6 +62,7 @@ for d in degrees:
 # Plot errors
 plt.plot(degrees, train_errors, marker="o", label="Training Error")
 plt.plot(degrees, val_errors, marker="o", label="Validation Error")
+
 plt.xlabel("Polynomial Degree")
 plt.ylabel("Mean Squared Error")
 plt.title("Bias-Variance Tradeoff")

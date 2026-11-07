@@ -15,14 +15,14 @@ and neurons).
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.preprocessing import StandardScaler
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score
 
 # Load dataset
 df = pd.read_csv("datasets/winequality-red.csv", sep=";")
 X = df.drop("quality", axis=1)
-y = LabelEncoder().fit_transform(df["quality"])
+y = df["quality"]
 
 # Split and scale
 X_train, X_test, y_train, y_test = train_test_split(
