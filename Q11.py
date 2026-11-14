@@ -39,22 +39,29 @@ pred = model.predict(X)
 print("Accuracy:", accuracy_score(y, pred))
 
 # Plot decision boundary and margins
-x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
-y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
-xx, yy = np.meshgrid(np.linspace(x_min, x_max, 200),
-                     np.linspace(y_min, y_max, 200))
+from sklearn.inspection import DecisionBoundaryDisplay
 
-Z = model.decision_function(np.c_[xx.ravel(), yy.ravel()])
-Z = Z.reshape(xx.shape)
+# 1. Automatically handles meshgrid, decision_function, and shading
+DecisionBoundaryDisplay.from_estimator(
+    model,
+    X,
+    plot_method="contour",
+    levels=[-1, 0, 1],
+    colors="k",
+    linestyles=["--", "-", "--"],
+)
 
-plt.contourf(xx, yy, Z, levels=[-100, 0, 100], alpha=0.2)
-plt.contour(xx, yy, Z, levels=[-1, 0, 1],
-            colors="black", linestyles=["--", "-", "--"])
+# 2. Plot your data points
+plt.scatter(X[:, 0], X[:, 1], c=y, edgecolors="k")
 
-plt.scatter(X[:, 0], X[:, 1], c=y, edgecolors="black")
-plt.scatter(model.support_vectors_[:, 0],
-            model.support_vectors_[:, 1],
-            s=150, facecolors="none", edgecolors="red")
+# 3. Highlight support vectors (optional, if your lab asks for it)
+plt.scatter(
+    model.support_vectors_[:, 0],
+    model.support_vectors_[:, 1],
+    s=100,
+    facecolors="none",
+    edgecolors="red",
+)
 
 plt.xlabel("Petal Length (scaled)")
 plt.ylabel("Petal Width (scaled)")
