@@ -29,6 +29,15 @@ df = pd.read_csv("datasets/iris.csv", names=cols).dropna()
 y = (df["species"] == "Iris-setosa").astype(int)
 X = df[["petal_length", "petal_width"]]
 
+'''
+for loading from sklearn
+
+data = load_iris()
+X = data.data[:, 2:4]
+y=(data.target !=0).astype(int)
+
+'''
+
 # Scale features and train SVM
 scaler = StandardScaler()
 X = scaler.fit_transform(X)

@@ -48,3 +48,16 @@ plt.title("Silhouette Analysis")
 
 plt.tight_layout()
 plt.show()
+
+# doesnt work for digits only for 2 feature models
+# best_k = 10 # Replace with whatever the elbow/silhouette shows is best
+# best_model = KMeans(n_clusters=best_k, random_state=42, n_init=10)
+# best_labels = best_model.fit_predict(X_s)
+#
+# plt.figure()
+# # Plots the data points colored by cluster
+# plt.scatter(X_s[:, 0], X_s[:, 1], c=best_labels, cmap='viridis', edgecolors='black')
+# # Plots the massive red 'X' for the center of each cluster
+# plt.scatter(best_model.cluster_centers_[:, 0], best_model.cluster_centers_[:, 1], s=200, c='red', marker='X', label='Centroids')
+# plt.title('Cluster Scatter Plot')
+# plt.legend()

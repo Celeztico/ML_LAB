@@ -24,6 +24,26 @@ y_train = train["label"].iloc[:10000]
 X_test = test.drop("label", axis=1).iloc[:2000] / 255.0
 y_test = test["label"].iloc[:2000]
 
+'''
+using tf dataset
+(X_train, y_train), (X_test,y_test) = tf.keras.datasets.fashion_mnist.load_data()
+
+# reduce size
+X_train = X_train[:10000]
+y_train = y_train[:10000]
+
+X_test = X_test[:2000]
+y_test = y_test[:2000]
+
+# Normalize
+X_train = X_train / 255.0
+X_test = X_test / 255.0
+
+# Flatten if using MLP
+X_train = X_train.reshape(-1, 784)
+X_test = X_test.reshape(-1, 784)
+'''
+
 # Try different K values
 k_values = [1, 3, 5, 7, 9]
 accuracies = []

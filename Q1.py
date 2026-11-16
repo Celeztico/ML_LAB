@@ -66,6 +66,8 @@ idx = X_test["AveRooms"].argsort()
 plt.scatter(X_test["AveRooms"], y_test, s=10)
 plt.plot(X_test["AveRooms"].iloc[idx],
          y_pred_lr[idx], color="red")
+plt.plot(X_test["AveRooms"].iloc[idx],
+         y_pred_gd[idx], color="green")
 plt.xlabel("Average Rooms per Dwelling")
 plt.ylabel("Median House Value")
 plt.title("Linear Regression")
