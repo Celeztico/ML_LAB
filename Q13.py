@@ -55,3 +55,13 @@ plt.xlabel("Hidden Layers")
 plt.ylabel("Accuracy")
 plt.title("MLP Architecture Comparison")
 plt.show()
+
+'''
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+ConfusionMatrixDisplay(confusion_matrix=cm).plot()
+plt.show()
+
+fpr , tpr, _ = roc_curve(y_test, model.predict_proba(X)[:,1])
+plot fpr,tpr
+'''
