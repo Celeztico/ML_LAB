@@ -18,6 +18,7 @@ import numpy as np
 from sklearn.svm import SVC
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
+from sklearn.inspection import DecisionBoundaryDisplay # plot
 
 # Load local dataset
 cols = ["sepal_length", "sepal_width", "petal_length",
@@ -39,7 +40,6 @@ pred = model.predict(X)
 print("Accuracy:", accuracy_score(y, pred))
 
 # Plot decision boundary and margins
-from sklearn.inspection import DecisionBoundaryDisplay
 
 # 1. Automatically handles meshgrid, decision_function, and shading
 DecisionBoundaryDisplay.from_estimator(
